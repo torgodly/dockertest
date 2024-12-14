@@ -24,6 +24,4 @@ jobs:
             # Run seeders after deployment
             docker-compose exec -T app php artisan db:seed --force
             
-            # Backup database
-            docker-compose exec -T app php artisan backup:run
             
