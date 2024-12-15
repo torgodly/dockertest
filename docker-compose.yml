@@ -82,24 +82,26 @@ services:
             - DB_PORT=3306
             - DB_DATABASE='laravel'
             - DB_USERNAME='laravel_user'
-            - DB_PASSWORD='j7kxu7cjo93b24ke'
+            - DB_PASSWORD='9qpsz2pvkf5dh11k'
 
 
     mysql:
         image: mysql:8.0
         container_name: laravel-mysql
         restart: unless-stopped
+        command: --default-authentication-plugin=mysql_native_password
         environment:
-            MYSQL_ROOT_PASSWORD: 'j7kxu7cjo93b24ke'
+            MYSQL_ROOT_PASSWORD: '9qpsz2pvkf5dh11k'
             MYSQL_DATABASE: 'laravel'
             MYSQL_USER: 'laravel_user'
-            MYSQL_PASSWORD: 'j7kxu7cjo93b24ke'
+            MYSQL_PASSWORD: '9qpsz2pvkf5dh11k'
+            MYSQL_ROOT_HOST: '%'
         volumes:
             - mysql-data:/var/lib/mysql
         networks:
             - sail
         ports:
-            - "3322:3306"
+            - "3339:3306"
 
 networks:
     sail:
