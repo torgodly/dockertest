@@ -8,11 +8,10 @@ USER root
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
-# Install PHP intl and exif extensions
+# Install base PHP dependencies
 RUN apt-get update && apt-get install -y \
     libicu-dev \
-    libexif-dev \
-    && docker-php-ext-install intl exif
+    libexif-dev
 
 COPY --chown=www-data:www-data . /var/www/html
 
@@ -21,5 +20,4 @@ USER www-data
 RUN npm install
 RUN npm run build
 
-# Run Composer with --ignore-platform-req=ext-exif to avoid issues in case the extension is not required.
 RUN composer install --no-interaction --optimize-autoloader
