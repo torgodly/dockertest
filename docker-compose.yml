@@ -85,7 +85,7 @@ services:
             - DB_PORT=3306
             - DB_DATABASE='laravel'
             - DB_USERNAME='laravel_user'
-            - DB_PASSWORD='xubcnyfjgpvdsdpr'
+            - DB_PASSWORD='g52b02kentmfwcsu'
 
 
     mysql:
@@ -94,19 +94,20 @@ services:
         restart: unless-stopped
         command: --default-authentication-plugin=mysql_native_password
         environment:
-            MYSQL_ROOT_PASSWORD: 'xubcnyfjgpvdsdpr'
+            MYSQL_ROOT_PASSWORD: 'g52b02kentmfwcsu'
             MYSQL_DATABASE: 'laravel'
             MYSQL_USER: 'laravel_user'
-            MYSQL_PASSWORD: 'xubcnyfjgpvdsdpr'
+            MYSQL_PASSWORD: 'g52b02kentmfwcsu'
             MYSQL_ROOT_HOST: '%'
         volumes:
             - mysql-data:/var/lib/mysql
+            - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
         networks:
             - sail
         ports:
-            - "3314:3306"
+            - "3329:3306"
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "laravel_user", "-p'g52b02kentmfwcsu'"]
             interval: 5s
             timeout: 5s
             retries: 20
