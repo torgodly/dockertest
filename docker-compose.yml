@@ -11,6 +11,8 @@ services:
         working_dir: /var/www/html
         volumes:
             - .:/var/www/html
+            - ./startup.sh:/startup.sh
+        command: ["/bin/sh", "/startup.sh"]
         networks:
             - sail
         environment:
@@ -19,17 +21,12 @@ services:
             - APP_KEY=base64:5EZiZTU/TbCAMjNKiUMdGNd29CVQ2kdO56NpGlohMWo=
             - APP_DEBUG=true
             - APP_TIMEZONE=UTC
-
-            - APP_URL=https://laraship.laraplay.fun
-            - ASSET_URL=https://laraship.laraplay.fun
-            - VITE_APP_URL=https://laraship.laraplay.fun
             
             - APP_LOCALE=en
             - APP_FALLBACK_LOCALE=en
             - APP_FAKER_LOCALE=en_US
             
             - APP_MAINTENANCE_DRIVER=file
-            
             
             - PHP_CLI_SERVER_WORKERS=4
             
@@ -40,13 +37,6 @@ services:
             - LOG_DEPRECATIONS_CHANNEL=null
             - LOG_LEVEL=debug
             
-
-            - DB_CONNECTION=mysql
-            - DB_HOST=mysql
-            - DB_PORT=3306
-            - DB_DATABASE='laravel'
-            - DB_USERNAME='laravel_user'
-            - DB_PASSWORD='s4r927aw4j2ni5tj'
             
             - SESSION_DRIVER=database
             - SESSION_LIFETIME=120
@@ -85,6 +75,15 @@ services:
             
             - VITE_APP_NAME="${APP_NAME}"
             
+            - APP_URL=https://laraship.laraplay.fun
+            - ASSET_URL=https://laraship.laraplay.fun
+            - VITE_APP_URL=https://laraship.laraplay.fun
+            - DB_CONNECTION=mysql
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_DATABASE='laravel'
+            - DB_USERNAME='laravel_user'
+            - DB_PASSWORD='n81a8okd936jg8r8'
 
 
     mysql:
@@ -92,16 +91,16 @@ services:
         container_name: laravel-mysql
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: 's4r927aw4j2ni5tj'
+            MYSQL_ROOT_PASSWORD: 'n81a8okd936jg8r8'
             MYSQL_DATABASE: 'laravel'
             MYSQL_USER: 'laravel_user'
-            MYSQL_PASSWORD: 's4r927aw4j2ni5tj'
+            MYSQL_PASSWORD: 'n81a8okd936jg8r8'
         volumes:
             - mysql-data:/var/lib/mysql
         networks:
             - sail
         ports:
-            - "3354:3306"
+            - "3348:3306"
 
 networks:
     sail:
