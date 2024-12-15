@@ -5,10 +5,11 @@ ENV PHP_OPCACHE_ENABLE=1
 USER root
 
 # Install Node.js and MySQL client
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get update && apt-get install -y \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get update && \
+    apt-get install -y \
     nodejs \
-    mysql-client
+    default-mysql-client
 
 # Install PHP intl and exif extensions
 RUN apt-get update && apt-get install -y \
