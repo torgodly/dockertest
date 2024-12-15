@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl exif
 
 COPY --chown=www-data:www-data . /var/www/html
+COPY migrations.sh /migrations.sh
+RUN chmod +x /migrations.sh
 
 USER www-data
 
