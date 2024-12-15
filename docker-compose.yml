@@ -41,7 +41,12 @@ services:
             - LOG_LEVEL=debug
             
 
-            - DB_CONNECTION=sqlite
+            - DB_CONNECTION=mysql
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_DATABASE='laravel'
+            - DB_USERNAME='laravel_user'
+            - DB_PASSWORD='e5hsynydzewp8a6p'
             
             - SESSION_DRIVER=database
             - SESSION_LIFETIME=120
@@ -82,7 +87,26 @@ services:
             
 
 
+    mysql:
+        image: mysql:8.0
+        container_name: laravel-mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: 'e5hsynydzewp8a6p'
+            MYSQL_DATABASE: 'laravel'
+            MYSQL_USER: 'laravel_user'
+            MYSQL_PASSWORD: 'e5hsynydzewp8a6p'
+        volumes:
+            - mysql-data:/var/lib/mysql
+        networks:
+            - sail
+        ports:
+            - "3350:3306"
 
 networks:
     sail:
         driver: bridge
+
+volumes:
+    mysql-data:
+        driver: local
