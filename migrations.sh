@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Wait for MySQL to be ready
-while ! mysqladmin ping -h mysql -u root -p'$DB_PASSWORD' --silent; do
+while ! mysqladmin ping -h mysql -u root -p'lfgcuww74xzo6lqq' --silent; do
     echo "Waiting for database connection..."
     sleep 2
 done
