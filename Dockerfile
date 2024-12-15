@@ -1,17 +1,15 @@
-FROM serversideup/php:8.2-fpm-nginx
+FROM serversideup/php:8.3-fpm-nginx
 
 ENV PHP_OPCACHE_ENABLE=1
 
 USER root
 
-# Install Node.js and MySQL client
+# Install Node.js
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-RUN apt-get update && apt-get install -y \
-    nodejs \
-    default-mysql-client
+RUN apt-get install -y nodejs
 
 # Install PHP intl and exif extensions
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libicu-dev \
     libexif-dev \
     && docker-php-ext-install intl exif
@@ -26,6 +24,5 @@ RUN npm run build
 # Run Composer with --ignore-platform-req=ext-exif to avoid issues in case the extension is not required.
 RUN composer install --no-interaction --optimize-autoloader
 
-
-
-CMD ["/bin/sh", "-c", "/init && php-fpm -D && nginx -g 'daemon off;'"]
+# Run migrations and seeds
+RUN php artisan migrate --force && php artisan db:seed --force
