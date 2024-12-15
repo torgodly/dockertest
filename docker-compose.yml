@@ -46,7 +46,7 @@ services:
             - DB_PORT=3306
             - DB_DATABASE='laravel'
             - DB_USERNAME='laravel_user'
-            - DB_PASSWORD='zdt3y2dy366tux0q'
+            - DB_PASSWORD='qibygj6wuo7908qg'
             
             - SESSION_DRIVER=database
             - SESSION_LIFETIME=120
@@ -88,8 +88,11 @@ services:
         depends_on:
             - mysql
         command: >
-            bash -c 'while ! mysqladmin ping -h mysql -u root -p"zdt3y2dy366tux0q" --silent; do
-            echo "Waiting for MySQL to be ready..."; sleep 2; done;
+            bash -c '
+            until mysql -h mysql -u root -p"qibygj6wuo7908qg" -e "SELECT 1" >/dev/null 2>&1; do
+                echo "Waiting for MySQL to be ready...";
+                sleep 2;
+            done;
             echo "MySQL is ready!";
             php artisan migrate --force && php artisan db:seed --force;
             /init && php-fpm -D && nginx -g "daemon off;"'
@@ -100,16 +103,16 @@ services:
         container_name: laravel-mysql
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: 'zdt3y2dy366tux0q'
+            MYSQL_ROOT_PASSWORD: 'qibygj6wuo7908qg'
             MYSQL_DATABASE: 'laravel'
             MYSQL_USER: 'laravel_user'
-            MYSQL_PASSWORD: 'zdt3y2dy366tux0q'
+            MYSQL_PASSWORD: 'qibygj6wuo7908qg'
         volumes:
             - mysql-data:/var/lib/mysql
         networks:
             - sail
         ports:
-            - "3348:3306"
+            - "3377:3306"
 
 networks:
     sail:
