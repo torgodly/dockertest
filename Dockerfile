@@ -24,5 +24,4 @@ RUN npm run build
 # Run Composer with --ignore-platform-req=ext-exif to avoid issues in case the extension is not required.
 RUN composer install --no-interaction --optimize-autoloader
 
-# Run migrations and seeds
-RUN php artisan migrate --force && php artisan db:seed --force
+CMD ["/bin/sh", "-c", "/init && php-fpm -D && nginx -g 'daemon off;'"]
