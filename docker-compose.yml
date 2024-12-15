@@ -11,8 +11,11 @@ services:
         working_dir: /var/www/html
         volumes:
             - .:/var/www/html
-            - ./migrations.sh:/migrations.sh
-        entrypoint: ["/bin/sh", "-c", "chmod +x /migrations.sh && /migrations.sh && /init"]
+            - type: bind
+              source: ./migrations.sh
+              target: /migrations.sh
+              read_only: true
+        entrypoint: ["/bin/sh", "-c", "/migrations.sh && /init"]
         networks:
             - sail
         environment:
@@ -83,7 +86,7 @@ services:
             - DB_PORT=3306
             - DB_DATABASE='laravel'
             - DB_USERNAME='laravel_user'
-            - DB_PASSWORD='io7v3rvpm3p1auro'
+            - DB_PASSWORD='tf8yzvnhelxdpchg'
 
 
     mysql:
@@ -91,16 +94,16 @@ services:
         container_name: laravel-mysql
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: 'io7v3rvpm3p1auro'
+            MYSQL_ROOT_PASSWORD: 'tf8yzvnhelxdpchg'
             MYSQL_DATABASE: 'laravel'
             MYSQL_USER: 'laravel_user'
-            MYSQL_PASSWORD: 'io7v3rvpm3p1auro'
+            MYSQL_PASSWORD: 'tf8yzvnhelxdpchg'
         volumes:
             - mysql-data:/var/lib/mysql
         networks:
             - sail
         ports:
-            - "3355:3306"
+            - "3386:3306"
 
 networks:
     sail:
