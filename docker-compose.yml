@@ -81,7 +81,7 @@ services:
 
             - VITE_APP_NAME="${APP_NAME}"
 
-        command: sh -c "php artisan migrate --force && php artisan db:seed --force"
+        
 
 
 
