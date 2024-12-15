@@ -15,9 +15,9 @@ services:
             - sail
         environment:
             - APP_KEY=base64:6DAznuyAftt0hFiiUtzwTMljFMuFND4RVGkJCOu8ZP0=
-            - APP_URL=https://tcb.dev.vrtualize.it
-            - ASSET_URL=https://tcb.dev.vrtualize.it
-            - VITE_APP_URL=https://tcb.dev.vrtualize.it
+            - APP_URL=https://laraship.laraplay.fun/
+            - ASSET_URL=https://laraship.laraplay.fun/
+            - VITE_APP_URL=https://laraship.laraplay.fun/
             - APP_ENV=local
             - APP_DEBUG=true
             - DB_CONNECTION=sqlite
