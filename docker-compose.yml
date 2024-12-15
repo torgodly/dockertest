@@ -9,8 +9,7 @@ services:
         container_name: laravel-container
         restart: unless-stopped
         working_dir: /var/www/html
-        depends_on:
-            - db
+        
         volumes:
             - .:/var/www/html
         environment:
@@ -37,12 +36,12 @@ services:
             - LOG_DEPRECATIONS_CHANNEL=null
             - LOG_LEVEL=debug
 
-            - DB_CONNECTION=mysql
-            - DB_HOST=db
-            - DB_PORT=3306
-            - DB_DATABASE=laravel
-            - DB_USERNAME=laravel_user
-            - DB_PASSWORD='BwlkLj11GNkyJ1d_'
+            - DB_CONNECTION=sqlite
+
+
+
+
+
 
             - SESSION_DRIVER=database
             - SESSION_LIFETIME=120
@@ -86,25 +85,9 @@ services:
         command: sh -c "php artisan migrate --force && php artisan db:seed --force"
 
 
-    db:
-        image: mysql:8.0
-        container_name: laravel-db
-        restart: unless-stopped
-        environment:
-            MYSQL_DATABASE: laravel
-            MYSQL_USER: laravel_user
-            MYSQL_PASSWORD: '9m9gq10qfesq4p9u'
-            MYSQL_ROOT_PASSWORD: '9m9gq10qfesq4p9u'
-        volumes:
-            - dbdata:/var/lib/mysql
-        networks:
-            - app-network
-
 
 networks:
     app-network:
         driver: bridge
 
-volumes:
-    dbdata:
-        driver: local
+
