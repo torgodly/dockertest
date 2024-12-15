@@ -46,7 +46,7 @@ services:
             - DB_PORT=3306
             - DB_DATABASE='laravel'
             - DB_USERNAME='laravel_user'
-            - DB_PASSWORD='vf1pgk5ak9zcds5d'
+            - DB_PASSWORD='vije2ytt016jhnkl'
             
             - SESSION_DRIVER=database
             - SESSION_LIFETIME=120
@@ -87,7 +87,6 @@ services:
             
         depends_on:
             - mysql
-        command: bash -c '/init && php-fpm -D && nginx -g "daemon off;"'
 
 
     mysql:
@@ -95,37 +94,16 @@ services:
         container_name: laravel-mysql
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: 'vf1pgk5ak9zcds5d'
+            MYSQL_ROOT_PASSWORD: 'vije2ytt016jhnkl'
             MYSQL_DATABASE: 'laravel'
             MYSQL_USER: 'laravel_user'
-            MYSQL_PASSWORD: 'vf1pgk5ak9zcds5d'
+            MYSQL_PASSWORD: 'vije2ytt016jhnkl'
         volumes:
             - mysql-data:/var/lib/mysql
         networks:
             - sail
         ports:
-            - "3371:3306"
-
-
-    deploy:
-        image: laravel-app
-        depends_on:
-            - mysql
-            - app
-        command: >
-            bash -c '
-            echo "Waiting for app container..."
-            until curl -s app > /dev/null; do
-                echo "Waiting for Laravel app to be ready...";
-                sleep 2;
-            done;
-            echo "Waiting for MySQL to be ready..."
-            until mysql -h mysql -u root -p"vf1pgk5ak9zcds5d" -e "SELECT 1" >/dev/null 2>&1; do
-                sleep 2;
-            done;
-            echo "Running migrations and seeds..."
-            php artisan migrate --force && php artisan db:seed --force;
-            echo "Database setup complete!"'
+            - "3326:3306"
 
 networks:
     sail:
