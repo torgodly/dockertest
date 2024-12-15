@@ -15,9 +15,9 @@ services:
             - sail
         environment:
             - APP_KEY=base64:6DAznuyAftt0hFiiUtzwTMljFMuFND4RVGkJCOu8ZP0=
-            - APP_URL=https://laraship.laraplay.fun/
-            - ASSET_URL=https://laraship.laraplay.fun/
-            - VITE_APP_URL=https://laraship.laraplay.fun/
+            - APP_URL=https://laraship.laraplay.fun
+            - ASSET_URL=https://laraship.laraplay.fun
+            - VITE_APP_URL=https://laraship.laraplay.fun
             - APP_ENV=local
             - APP_DEBUG=true
             - DB_CONNECTION=sqlite
