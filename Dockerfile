@@ -4,12 +4,9 @@ ENV PHP_OPCACHE_ENABLE=1
 
 USER root
 
-# Install Node.js and MySQL client
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get update && \
-    apt-get install -y \
-    nodejs \
-    default-mysql-client
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
 
 # Install PHP intl and exif extensions
 RUN apt-get update && apt-get install -y \
@@ -18,8 +15,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl exif
 
 COPY --chown=www-data:www-data . /var/www/html
-COPY migrations.sh /migrations.sh
-RUN chmod +x /migrations.sh
 
 USER www-data
 
@@ -28,3 +23,6 @@ RUN npm run build
 
 # Run Composer with --ignore-platform-req=ext-exif to avoid issues in case the extension is not required.
 RUN composer install --no-interaction --optimize-autoloader
+
+# Run migrations and seeds
+RUN php artisan migrate --force && php artisan db:seed --force
